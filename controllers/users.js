@@ -1,6 +1,13 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const { securityKey } = require('../configuration/config');
+const {
+  BADREQUEST_ERR_MESSAGE,
+  CONFLICT_ERR_MESSAGE,
+  USER_NOTFOUND_ERR_MESSAGE,
+  LOGIN_SUCCESS_MESSAGE,
+} = require('../constants/constants');
 const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
@@ -26,9 +33,9 @@ const createUser = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Неверный запрос'));
+        next(new BadRequestError(BADREQUEST_ERR_MESSAGE));
       } else if (err.name === 'MongoError' && err.code === 11000) {
-        next(new ConflictError('Пользователь уже существует'));
+        next(new ConflictError(CONFLICT_ERR_MESSAGE));
       } else {
         next(err);
       }
@@ -43,12 +50,12 @@ const signIn = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        (process.env.JWT_KEY || 'dev-key'),
+        securityKey,
         { expiresIn: '7d' },
       );
       res
         .cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true })
-        .send({ message: 'Вы вошли!' })
+        .send({ message: LOGIN_SUCCESS_MESSAGE })
         .end();
     })
     .catch(next);
@@ -57,7 +64,7 @@ const signIn = (req, res, next) => {
 const getUser = (req, res, next) => {
   User
     .findById(req.user._id)
-    .orFail(() => new NotFoundError('Пользователь не найден'))
+    .orFail(() => new NotFoundError(USER_NOTFOUND_ERR_MESSAGE))
     .then((user) => res.send(user))
     .catch(next);
 };

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+
+const {
+  WRONG_DATA_UNATHORIZED_ERR_MESSAGE,
+} = require('../constants/constants');
 const UnathorizedError = require('../errors/UnathorizedError');
 
 const userSchema = mongoose.Schema({
@@ -29,15 +33,18 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.statics.findUserByCredentials = function findUserByCredentials(email, password) {
-  return this.findOne({ email }).select('+password')
+  return this
+    .findOne({ email })
+    .select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new UnathorizedError('Неправильные почта или пароль'));
+        return Promise.reject(new UnathorizedError(WRONG_DATA_UNATHORIZED_ERR_MESSAGE));
       }
-      return bcrypt.compare(password, user.password)
+      return bcrypt
+        .compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return Promise.reject(new UnathorizedError('Неправильные почта или пароль'));
+            return Promise.reject(new UnathorizedError(WRONG_DATA_UNATHORIZED_ERR_MESSAGE));
           }
           return user;
         });
