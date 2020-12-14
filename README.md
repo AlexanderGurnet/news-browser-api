@@ -3,7 +3,7 @@ This is a REST API for a project called news-browser.
 
 Public IP of a server: 178.154.247.42
 
-Domain name of a server: https://www.api.news-browser.students.nomoreparties.space
+Domain name of a server: https://api.news-browser.students.nomoreparties.space
 
 ## Deploying
 
