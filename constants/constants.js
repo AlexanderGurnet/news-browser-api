@@ -1,7 +1,7 @@
 const UNATHORIZED_ERR_MESSAGE = 'Необходима авторизация';
 const WRONG_DATA_UNATHORIZED_ERR_MESSAGE = 'Неправильные почта или пароль';
 const ARTICLE_NOTFOUND_ERR_MESSAGE = 'Не найдено ни одной статьи';
-const ARTICLE_BYID_NOTFOUND_ERR_MESSAGE = 'Статьи с таким id не найдена';
+const ARTICLE_BYID_NOTFOUND_ERR_MESSAGE = 'Статья с таким id не найдена';
 const RESOURCE_NOTFOUND_ERR_MESSAGE = 'Запрашиваемый ресурс не найден';
 const FORBIDDEN_ERR_MESSAGE = 'Вы не можете удалить эту статью';
 const BADREQUEST_ERR_MESSAGE = 'Неверный запрос';
