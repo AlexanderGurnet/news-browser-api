@@ -22,12 +22,12 @@ const app = express();
 mongoose.connect(dbLink, dbConfig);
 
 app.use(helmet());
+app.use(requestLogger);
 app.use(rateLimit(rateLimitConfig));
 
 app.use(cookieParser());
 app.use(bodyParser.json(bodyParserConfig));
 
-app.use(requestLogger);
 app.use(router);
 app.use(errorLogger);
 
