@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const {
   SYNTAX_ERR_MESSAGE,
   SERVERSIDE_ERR_MESSAGE,
