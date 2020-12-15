@@ -1,10 +1,10 @@
 const { Joi, celebrate } = require('celebrate');
-const { passwordRegExpPattern, urlRegExpPattern } = require('../configuration/config');
+const { urlRegExpPattern } = require('../configuration/config');
 
 const checkSignupInputData = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().pattern(passwordRegExpPattern),
+    password: Joi.string().required().min(8).max(15),
     name: Joi.string().required().min(2).max(30),
   }),
 });
@@ -12,7 +12,7 @@ const checkSignupInputData = celebrate({
 const checkSigninInputData = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().pattern(passwordRegExpPattern),
+    password: Joi.string().required().min(8).max(15),
   }),
 });
 

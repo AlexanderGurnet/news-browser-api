@@ -19,24 +19,35 @@ const createArticle = (req, res, next) => {
     image,
   } = req.body;
 
-  Article.create({
-    keyword,
-    title,
-    text,
-    date,
-    source,
-    link,
-    image,
-    owner,
-  })
-    .then((article) => res.send(article))
+  Article
+    .create({
+      keyword,
+      title,
+      text,
+      date,
+      source,
+      link,
+      image,
+      owner,
+    })
+    .then((article) => {
+      res.send({
+        _id: article._id,
+        keyword: article.keyword,
+        title: article.title,
+        text: article.text,
+        date: article.date,
+        source: article.source,
+        link: article.link,
+        image: article.image,
+      });
+    })
     .catch(next);
 };
 
 const getArticles = (req, res, next) => {
   Article
     .find({ owner: req.user._id })
-    .select('+owner')
     .orFail(() => new NotFoundError(ARTICLE_NOTFOUND_ERR_MESSAGE))
     .then((articles) => res.send(articles))
     .catch(next);
@@ -53,7 +64,18 @@ const deleteArticleById = (req, res, next) => {
         next(new ForbiddenError(FORBIDDEN_ERR_MESSAGE));
       } else {
         Article.deleteOne(article)
-          .then(() => res.send(article));
+          .then(() => {
+            res.send({
+              _id: article._id,
+              keyword: article.keyword,
+              title: article.title,
+              text: article.text,
+              date: article.date,
+              source: article.source,
+              link: article.link,
+              image: article.image,
+            });
+          });
       }
     })
     .catch(next);

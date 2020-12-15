@@ -20,8 +20,6 @@ const rateLimitConfig = {
 
 const bodyParserConfig = { type: 'application/json' };
 
-const passwordRegExpPattern = new RegExp(/^[a-zA-Z0-9*]{8,15}$/);
-
 const urlRegExpPattern = new RegExp(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/);
 
 module.exports = {
@@ -31,6 +29,5 @@ module.exports = {
   dbConfig,
   port,
   securityKey,
-  passwordRegExpPattern,
   urlRegExpPattern,
 };
