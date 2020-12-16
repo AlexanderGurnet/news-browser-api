@@ -18,6 +18,7 @@ const centralErrorHandler = (err, req, res, next) => {
           : message,
       });
   }
+  next();
 };
 
 module.exports = centralErrorHandler;
