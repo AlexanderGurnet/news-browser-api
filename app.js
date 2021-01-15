@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const helmet = require('helmet');
 const celebrateErrorHandler = require('celebrate').errors();
 const rateLimit = require('express-rate-limit');
