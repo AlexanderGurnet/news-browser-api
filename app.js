@@ -19,6 +19,11 @@ const {
 
 const app = express();
 
+app.use(cors({
+  origin: ['http://localhost:8080', 'http://localhost:3000'],
+  credentials: true,
+}));
+
 mongoose.connect(dbLink, dbConfig);
 
 app.use(helmet());
