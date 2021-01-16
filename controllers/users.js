@@ -54,9 +54,8 @@ const signIn = (req, res, next) => {
         { expiresIn: '7d' },
       );
       res
-        .cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true })
-        .send({ message: user.name })
-        .end();
+        .cookie('jwt', token, { maxAge: 3600000 * 24 * 7 })
+        .send({ message: user.name });
     })
     .catch(next);
 };
