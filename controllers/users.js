@@ -6,7 +6,7 @@ const {
   BADREQUEST_ERR_MESSAGE,
   CONFLICT_ERR_MESSAGE,
   USER_NOTFOUND_ERR_MESSAGE,
-  LOGIN_SUCCESS_MESSAGE,
+  // LOGIN_SUCCESS_MESSAGE,
 } = require('../constants/constants');
 const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
@@ -54,7 +54,7 @@ const signIn = (req, res, next) => {
         { expiresIn: '7d' },
       );
       res
-        .cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true })
+        .cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true })
         .send({ message: user.name })
         .end();
     })
