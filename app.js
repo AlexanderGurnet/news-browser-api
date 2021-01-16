@@ -18,12 +18,23 @@ const {
   port,
 } = require('./configuration/config');
 
+const whitelist = ['http://localhost:8080', 'http://localhost:3000'];
+const corsOptions = {
+  origin(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  allowedHeaders: 'Content-Type',
+  optionsSuccessStatus: 200,
+};
+
 const app = express();
 
-app.use(cors({
-  origin: ['http://localhost:8080', 'http://localhost:3000'],
-  credentials: true,
-}));
+app.use(cors(corsOptions));
 
 mongoose.connect(dbLink, dbConfig);
 
