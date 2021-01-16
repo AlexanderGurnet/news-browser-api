@@ -55,7 +55,7 @@ const signIn = (req, res, next) => {
       );
       res
         .cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true })
-        .send({ message: LOGIN_SUCCESS_MESSAGE })
+        .send({ message: user })
         .end();
     })
     .catch(next);
