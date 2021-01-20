@@ -1,5 +1,5 @@
 const { Joi, celebrate } = require('celebrate');
-const { urlRegExpPattern } = require('../configuration/config');
+// const { urlRegExpPattern } = require('../configuration/config');
 
 const checkSignupInputData = celebrate({
   body: Joi.object().keys({
@@ -29,8 +29,8 @@ const checkArticleInputData = celebrate({
     text: Joi.string().required(),
     date: Joi.string().required(),
     source: Joi.string().required(),
-    link: Joi.string().required().pattern(urlRegExpPattern),
-    image: Joi.string().required().pattern(urlRegExpPattern),
+    link: Joi.string().required().uri(),
+    image: Joi.string().required().uri(),
   }),
 });
 
