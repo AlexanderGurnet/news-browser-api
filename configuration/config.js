@@ -20,7 +20,7 @@ const rateLimitConfig = {
 
 const bodyParserConfig = { type: 'application/json' };
 
-const urlRegExpPattern = new RegExp(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/);
+const urlRegExpPattern = new RegExp(/[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/);
 
 module.exports = {
   rateLimitConfig,
