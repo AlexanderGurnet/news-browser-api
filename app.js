@@ -18,7 +18,7 @@ const {
   port,
 } = require('./configuration/config');
 
-const whitelist = ['http://localhost:8080', 'http://localhost:3000'];
+const whitelist = ['http://localhost:8080', 'http://localhost:3000', 'https://news-browser.students.nomoreparties.space', 'https://www.news-browser.students.nomoreparties.space'];
 const corsOptions = {
   origin(origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
